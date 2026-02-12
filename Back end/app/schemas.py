@@ -12,7 +12,7 @@ class UserCreate(UserBase):
 
 
 class User(UserBase):
-    id: int
+    id: str
     avatar: Optional[str] = None
     created_at: datetime
     class Config:
@@ -32,7 +32,7 @@ class ProjectCreate(ProjectBase):
     pass
 
 class Project(ProjectBase):
-    id: int 
+    id: str
     created_at: datetime
     updated_at: Optional[datetime] = None
     class Config:
@@ -50,22 +50,22 @@ class BoardCreate(BoardBase):
 
 
 class Board(BoardBase):
-    id: int 
+    id: str
     created_at: datetime
     class Config:
         from_attributes = True
 
 
-#column schemas
+#BoardColumn schemas
 
-class ColumnBase(BaseModel):
+class BoardColumnBase(BaseModel):
     name: str
     position: int
 
-class ColumnCreate(ColumnBase):
+class BoardColumnCreate(BoardColumnBase):
     board_id: str
 
-class Column(ColumnBase):
+class BoardColumn(BoardColumnBase):
     id :str
     created_at: datetime
     board_id: str
@@ -95,8 +95,8 @@ class TaskUpdate(TaskBase):
     assignee_id: Optional[str] = None
 
 class Task(TaskBase):
-    id:str
-    Column_id: str
+    id: str
+    column_id: str
     position: int
     assignee_id: Optional[str] = None
     created_at: datetime
