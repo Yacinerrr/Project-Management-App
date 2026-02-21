@@ -1,10 +1,25 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { api } from '@/src/lib/api';
+
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const token = api.getToken();
+    if (token) {
+      router.push('/projects');
+    } else {
+      router.push('/login');
+    }
+  }, [router]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Project Management App</h1>
-        <p className="text-gray-600">Let's build something awesome!</p>
-      </div>
-    </main>
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-gray-600">Loading...</p>
+    </div>
   );
 }
